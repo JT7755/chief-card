@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="Description" content="Put your description here.">
+  <base href="/">
+
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+      background-color: #ededed;
+    }
+  </style>
+  <title>chief-card</title>
+</head>
+
+<body>
+  <div class="coolawesomebuttons">
+    <p>Buttons that do cool things:</p>
+    <button class="dupBtn">Duplicate Last Card</button>
+    <button data-toggle-btn>Toggle Songs</button>
+    <button class="txtBtn">Change Name</button>
+    <button class="deleteBtn">Delete</button>
+    <style>
+      .coolawesomebuttons {
+      border: 3.5px solid;
+      background-color: blue;
+    }
+    .dupBtn:focus,.dupBtn:hover {
+      background-color: white;
+      color: blue;
+    }
+    .button[data-toggle-btn]:focus, .button[data-toggle-btn]:hover {
+      background-color: white;
+      color: blue;
+    }
+    .txtBtn:focus, .txtBtn:hover {
+      background-color: white;
+      color: blue;
+    }
+    .deleteBtn:focus, .deleteBtn:hover {
+      background-color: white;
+      color: blue;
+    }
+    </style>
+  </div>
+  <div id="app">
+  <chief-card></chief-card>
+  </div>
+  <script type="module" src="./src/chief-card.js"></script>
+  <script>
+    // duplicate the 1st item 
+    document.querySelector('.dupBtn').addEventListener('click', function(e) {
+      const itemToClone = document.querySelector('chief-card').cloneNode();
+      document.querySelector('#app').appendChild(itemToClone);
+    });
+
+    // toggle songs
+    document.querySelector('button[data-toggle-btn]').addEventListener('click', (e) => {
+      const details = document.querySelector('chief-card').shadowRoot.querySelector('details');
+      console.log(details);
+      if (details.getAttribute('open')) {
+        details.removeAttribute('open');
+      } else {
+        details.setAttribute('open', 'open');
+      }
+    });
+
+    // change name 
+    document.querySelector('.txtBtn').addEventListener('click', function(e) {
+      let name = prompt("Rename the collection....");
+      if (name) {
+        document.querySelector('chief-card').shadowRoot.querySelector('.wrapper h3').innerText = name;
+      }
+    });
+
+    // delete the last item
+    document.querySelector('.deleteBtn').addEventListener('click', function(e) {
+      let wantsTo = confirm("Are you sure?");
+      if (wantsTo) {
+        if (document.querySelector('#app :last-child') !== document.querySelector('chief-card')) {
+          document.querySelector('#app :last-child').remove();      
+        }
+        else {
+          alert("YOU CAN NOT DELETE KEEF!!!!");
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>
