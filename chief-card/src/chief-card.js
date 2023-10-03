@@ -21,18 +21,6 @@ export class ChiefCard extends LitElement {
 
   static get styles() {
     return css`
-    :host((accent-color="blue")) .wrapper{
-      background-color: blueviolet;
-      color: white;
-    }
-    :host((accent-color="red")) .wrapper{
-      background-color: red;
-      color: white;
-    }
-    :host((accent-color="green")) .wrapper{
-      background-color: green;
-      color: white;
-    }
     .wrapper {
       display: inline-block;
       background-color: blue;
